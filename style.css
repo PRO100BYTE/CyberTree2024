@@ -1,0 +1,271 @@
+p {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100vmin;
+  height: 100vmin;
+  padding-top: 25vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(10%) rotate(-66deg);
+}
+
+p span {
+  margin: 0.5vmin auto 2.25vmin;
+  display: flex;
+  align-items: center;
+  height: 4vmin;
+  width: 82%;
+  gap: 1vmin;
+  animation: wavy 5000ms calc(var(--i) * -3000ms - 2000ms) infinite alternate
+    ease-in-out;
+}
+
+b, i {
+  display: inline-block;
+  color: hsl(var(--h, 123), 80%, var(--s, 50%));
+  background: linear-gradient(
+    to bottom,
+    currentColor,
+    currentColor,
+    hsl(var(--h, 123), 80%, 76%),
+    currentColor,
+    currentColor,
+    currentColor,
+    currentColor
+  );
+  border-radius: 1.5vmin;
+  height: 3vmin;
+
+  filter: drop-shadow(0px 0px 5px hsl(var(--h, 123), 80%, var(--s, 50%)));
+  translate: calc((5 + var(--i)) * -2vmin) 0;
+}
+
+b {
+  flex: 2;
+}
+
+b:nth-of-type(2) {
+  flex: 2.5;
+}
+
+b:nth-of-type(3) {
+  flex: 1.5;
+}
+
+span:nth-child(even) b {
+  flex: 1.2;
+}
+
+span:nth-child(even) b:nth-of-type(2) {
+  flex: 2;
+}
+
+span:nth-child(even) b:nth-of-type(3) {
+  flex: 2.5;
+}
+
+i {
+  width: 4vmin;
+  height: 4vmin;
+  border-radius: 2vmin;
+  --h: 343;
+  animation: rainbow 5000ms infinite linear;
+  background: linear-gradient(
+      hsl(var(--h, 123) 80% 50% / 0),
+      hsl(var(--h, 123) 80% 50%),
+      hsl(var(--h, 123) 80% 50%)
+    ),
+    radial-gradient(
+      currentColor,
+      currentColor,
+      currentColor,
+      hsl(var(--h, 123), 80%, 76%),
+      currentColor,
+      currentColor,
+      currentColor
+    );
+}
+
+span + span {
+  width: 74%;
+  --h: 133;
+}
+
+span + span + span {
+  width: 64%;
+  --h: 143;
+}
+
+span + span + span + span {
+  width: 57%;
+  --h: 153;
+}
+
+span + span + span + span + span {
+  width: 50%;
+  --h: 163;
+}
+
+span + span + span + span + span + span {
+  width: 38%;
+  --h: 173;
+}
+
+span + span + span + span + span + span + span {
+  width: 28%;
+  --h: 183;
+}
+
+span + span + span + span + span + span + span + span {
+  width: 16%;
+  --h: 193;
+}
+
+span + span + span + span + span + span + span + span + span {
+  width: 8%;
+  --h: 203;
+}
+
+@keyframes rainbow {
+  0%,
+  18% {
+    --h: -17;
+  }
+  18.1%,
+  36% {
+    --h: 33;
+  }
+  36.1%,
+  54% {
+    --h: 63;
+  }
+  54.1%,
+  72% {
+    --h: 213;
+  }
+  72.1%,
+  90% {
+    --h: 273;
+  }
+  90.1%,
+  100% {
+    --h: 323;
+  }
+}
+
+@keyframes candy-cane {
+  0%,
+  48%,
+  100% {
+    --h: 343;
+    --s: 50%;
+  }
+  50%,
+  98% {
+    --h: 343;
+    --s: 96%;
+  }
+}
+
+@keyframes wavy {
+  0% {
+    transform: translateX(-0.8vmin);
+  }
+  100% {
+    transform: translateX(0.8vmin);
+  }
+}
+
+@property --h {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 123;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+  perspective: 100vmin;
+  overflow: hidden;
+  background: #000000;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.snow-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+}
+
+@-webkit-keyframes flake {
+  0% {
+    transform: translate(var(--x-start), var(--y-start)) rotate(0);
+  }
+  100% {
+    transform: translate(var(--x-end), var(--y-end)) rotate(50deg);
+  }
+}
+
+@keyframes flake {
+  0% {
+    transform: translate(var(--x-start), var(--y-start)) rotate(0);
+  }
+  100% {
+    transform: translate(var(--x-end), var(--y-end)) rotate(50deg);
+  }
+}
+
+.snowflake {
+  --time: 3;
+  --sz: 1rem;
+  --blur: 2px;
+  --a: .6;
+  --x-start: 50vw;
+  --x-end: 0;
+  --y-start: -25vh;
+  --y-end: 100vh;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  font-size: var(--sz);
+  filter: url(#circleBlur4);
+  -webkit-animation: flake calc(var(--time) * 1s) linear infinite var(--delay);
+          animation: flake calc(var(--time) * 1s) linear infinite var(--delay);
+  transform: translate(var(--x-start), -15vh) rotate(0);
+  opacity: var(--a);
+  z-index: 1000;
+}
+
+.snowflake--m {
+  --a: .5;
+  --time: 2;
+  --sz: 2rem;
+  z-index: 2000;
+  filter: unset;
+}
+
+.snowflake--l {
+  --a: .8;
+  --time: 5;
+  --sz: 3rem;
+  z-index: 8000;
+}
+
+.snowflake--xl {
+  --a: 1;
+  --time: 10;
+  --sz: 5rem;
+  filter: url(#circleBlur40);
+  z-index: 14000;
+}
